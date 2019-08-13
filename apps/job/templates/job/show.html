@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Handy Helper Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .container {
+            margin-top: 25px;
+        }
+
+        .container a {
+            margin-left: 750px;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        h3 {
+            /* margin-left: 0px; */
+            display: inline-block;
+            vertical-align: top;
+        }
+        .table{
+            width: 800px;
+        }
+        .main{
+            margin-left: 250px;
+        }
+
+       
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>
+            Hello, {{user.first_name}}
+        </h3>
+        <a class="btn btn-info" href="/jobs/new">New Job</a> <a style="margin-top: -40px" class="btn btn-primary" href="/logout">Logout</a>  
+        {% if messages %}
+        <p style="color: red" {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+        {% endif %}
+    </div>
+    <hr>
+    <div class="main">
+        <div class="up">
+            <h3>Everyone's Jobs:</h3>
+            <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th scope="col">Job</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+               
+                {% for one_job in jobs %}
+                {% if user.id == one_job.uploaded_by.id %}
+                  <tr>
+                    <td>{{one_job.title}}</td>
+                    <td>{{one_job.location}}</td>
+                    <td><a href="/shows/{{one_job.id}}">  View  </a>|<a href="/shows/{{one_job.id}}/remove">  Remove  </a>|<a href="/shows/{{one_job.id}}/edit">  Edit  </a>|<a href="/jobs/new">  Add  </a></td>
+                  </tr>
+                  {% endif %}
+                {% endfor %}
+                
+
+                
+                {% for one_job in jobs %}
+                {% if user.id != one_job.uploaded_by.id %}
+                  <tr>
+                    <td>{{one_job.title}}</td>
+                    <td>{{one_job.location}}</td>
+                    <td><a href="/shows/{{one_job.id}}">  View  </a>|<a href="/jobs/new">  Add  </a></td>
+                  </tr>
+                  {% endif %}
+                {% endfor %}
+                
+
+                </tbody>
+              </table>
+        </div>
+<br><br>
+        <div class="down">
+            <h3>{{user.first_name}}'s jobs</h3>
+            <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th scope="col">Job</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% for one_job in jobs %}
+                      <tr>
+                        <td>{{one_job.title}}</td>
+                        <td><a href="/shows/{{one_job.id}}">View</a>|<a href="/shows/{{one_job.id}}/remove">Remove</a>|<a href="/shows/{{one_job.id}}/edit">Edit</a>|<a href="/shows/{{one_job.id}}/add">Add</a></td>
+                      </tr>
+                    {% endfor %}
+                    </tbody>
+                  </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

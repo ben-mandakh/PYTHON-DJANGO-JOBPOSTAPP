@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Show One</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        .container {
+            margin-top: 25px;
+        }
+
+        .container a {
+            margin-left: 450px;
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        h3 {
+            /* margin-left: 0px; */
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .left {
+            display: inline-block;
+            vertical-align: top;
+            margin-left: 155px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h3>
+            Hello, {{user.first_name}}! These are the job details!
+        </h3>
+        <a class="btn btn-info" href="/success">Dashboard</a> <a class="btn btn-primary" href="/logout">Logout</a> <br>
+        {% if messages %}
+        <p style="color: red" {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</p>
+        {% endif %}
+    </div>
+    <hr>
+    <div class="main">
+        <div class="left">
+
+                <h2>{{ job.title }}</h2> <br><br>
+                <p>Description: {{job.description }} </p>
+                <p>Location: {{job.location }} </p>
+                <p>Posted by: {{ job.uploaded_by.first_name }}</p>
+                <p>Posted on: {{ job.created_at }}</p>
+                <p>Last updated on: {{job.updated_at }}</p>
+                <a href="/success">Add to Favorites</a>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
